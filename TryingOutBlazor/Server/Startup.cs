@@ -1,3 +1,4 @@
+using EmbeddedBlazorContent;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -36,6 +37,8 @@ namespace TryingOutBlazor.Server
             app.UseClientSideBlazorFiles<Client.Program>();
 
             app.UseRouting();
+
+            app.UseEmbeddedBlazorContent(typeof(MatBlazor.BaseMatComponent).Assembly);
 
             app.UseEndpoints(endpoints =>
             {

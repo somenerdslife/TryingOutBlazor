@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
+@*<div class="sidebar">
     <NavMenu />
 </div>
 
@@ -12,4 +12,71 @@
     <div class="content px-4">
         @Body
     </div>
-</div>
+</div>*@
+
+    <MatAppBarContainer>
+        <MatAppBar Fixed="true">
+            <MatAppBarRow>
+                <MatAppBarSection>
+                    <MatIconButton Icon="menu" OnClick="@((e) => ButtonClicked())"></MatIconButton>
+                    <MatAppBarTitle>Baby's First Blazor App</MatAppBarTitle>
+                </MatAppBarSection>
+                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                    <NavLink class="text-white nav-link" href="" Match="NavLinkMatch.All">
+                        Home
+                    </NavLink>
+                    <NavLink class="text-white nav-link" href="" Match="NavLinkMatch.All">
+                        Counter
+                    </NavLink>
+                    <NavLink class="text-white nav-link" href="" Match="NavLinkMatch.All">
+                        FetchData
+                    </NavLink>
+                </MatAppBarSection>
+            </MatAppBarRow>
+        </MatAppBar>            
+        <MatAppBarContent>
+            <MatDrawerContainer>
+                <MatDrawer @bind-Opened="@Opened" Mode="@MatDrawerMode.Modal">
+                    <MatListGroup>
+                        <MatListGroupSubHeader>Dashboard</MatListGroupSubHeader>
+                        <MatList>
+                            <MatListItem>
+                                Post
+                            </MatListItem>
+                            <MatListItem>
+                                Pages
+                            </MatListItem>
+                            <MatListItem>
+                                Media
+                            </MatListItem>
+                        </MatList>
+                        <MatListGroupSubHeader>Account Settings</MatListGroupSubHeader>
+                        <MatList>
+                            <MatListItem>
+                                Profile
+                            </MatListItem>
+                            <MatListItem>
+                                Change Password
+                            </MatListItem>
+                            <MatListItem>
+                                Logout
+                            </MatListItem>
+                        </MatList>
+                    </MatListGroup>
+                </MatDrawer>
+            </MatDrawerContainer>
+            <MatDrawerContent>
+                <div style="margin: 1em; padding: 1em;" class="container">
+                    @Body
+                </div>
+            </MatDrawerContent>
+        </MatAppBarContent>
+    </MatAppBarContainer>
+
+@functions {
+    bool Opened = false;
+    void ButtonClicked()
+    {
+        Opened = !Opened;
+    }
+}
